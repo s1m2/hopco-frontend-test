@@ -1,0 +1,29 @@
+{
+  "inventory_list": [
+    {
+      "id": 1,
+      "name": "product_name",
+      "display_value": "Product Name"
+    },
+    {
+      "id": 2,
+      "name": "item_number",
+      "display_value": "Item Number"
+    },
+    {
+      "id": 3,
+      "name": "manufacturer",
+      "display_value": "Manufacturer"
+    },
+    {
+      "id": 4,
+      "name": "category",
+      "display_value": "Category"
+    },
+    {
+      "id": 5,
+      "name": "quantity",
+      "display_value": "Quantity"
+    }
+  ]
+}

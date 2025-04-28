@@ -1,0 +1,34 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "product_name": "Curved Knief",
+      "item_number": "TX-10003",
+      "manufacturer": "Bosch",
+      "category": "surgical",
+      "quantity": 9,
+      "expiry_date": "2023-10-01",
+      "price": 100.0
+    },
+    {
+      "id": 2,
+      "product_name": "Surgical Scissors",
+      "item_number": "TX-10004",
+      "manufacturer": "Bosch",
+      "category": "surgical",
+      "quantity": 11,
+      "expiry_date": "2023-10-01",
+      "price": 700.0
+    },
+    {
+      "id": 3,
+      "product_name": "Surgical Knife",
+      "item_number": "TX-10005",
+      "manufacturer": "Bosch",
+      "category": "surgical",
+      "quantity": 6,
+      "expiry_date": "2024-10-01",
+      "price": 600.0
+    }
+  ]
+}

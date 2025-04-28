@@ -1,0 +1,28 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "product_name": "Blade",
+      "item_number": "TX-10003",
+      "manufacturer": "Bosch",
+      "category": "surgical",
+      "quantity": 9
+    },
+    {
+      "id": 2,
+      "product_name": "Carrier",
+      "item_number": "TX-10004",
+      "manufacturer": "Bosch",
+      "category": "surgical",
+      "quantity": 11
+    },
+    {
+      "id": 3,
+      "product_name": "Trimmer",
+      "item_number": "TX-10005",
+      "manufacturer": "Bosch",
+      "category": "surgical",
+      "quantity": 8
+    }
+  ]
+}
