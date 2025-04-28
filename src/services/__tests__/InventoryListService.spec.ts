@@ -8,7 +8,6 @@ import type { Inventory } from '@/types/inventory';
 describe('InventoryListService', () => {
   let service: InventoryListService;
 
-  // Mock localStorage
   const localStorageMock = (() => {
     let store = {};
     return {
@@ -22,7 +21,6 @@ describe('InventoryListService', () => {
     };
   })();
 
-  // Replace the global localStorage with our mock
   beforeEach(() => {
     Object.defineProperty(window, 'localStorage', {
       value: localStorageMock,
@@ -76,7 +74,6 @@ describe('InventoryListService', () => {
 
   describe('inherited getAllItems', () => {
     it('should return Nairobi inventory list when Nairobi user is logged in', () => {
-      // Setup logged-in user
       localStorageMock.getItem.mockImplementation((key) => {
         if (key === 'user') return JSON.stringify({ username: NAIROBI_USER });
         return null;
@@ -87,7 +84,6 @@ describe('InventoryListService', () => {
     });
 
     it('should return Matter inventory list when Matter user is logged in', () => {
-      // Setup logged-in user
       localStorageMock.getItem.mockImplementation((key) => {
         if (key === 'user') return JSON.stringify({ username: MATTER_USER });
         return null;
@@ -183,12 +179,11 @@ describe('InventoryListService', () => {
         description: 'Invalid Description'
       } as Inventory;
 
-      // Reset the mock to track new calls
       localStorageMock.setItem.mockClear();
 
       const updatedItems = service.updateItem(existingItems, {
         newData: updatedItem,
-        index: 3 // Invalid index
+        index: 3
       });
 
       expect(updatedItems).toEqual(existingItems);
@@ -222,7 +217,6 @@ describe('InventoryListService', () => {
         description: 'Does not exist'
       } as Inventory;
 
-      // Reset the mock to track new calls
       localStorageMock.setItem.mockClear();
 
       const updatedItems = service.deleteItem(existingItems, nonExistentItem);
@@ -248,7 +242,6 @@ describe('InventoryListService', () => {
 
   describe('integration with user-specific data', () => {
     it('should correctly use the getInventoryNames method with user-specific data', () => {
-      // Setup Matter user
       localStorageMock.getItem.mockImplementation((key) => {
         if (key === 'user') return JSON.stringify({ username: MATTER_USER });
         return null;
@@ -257,7 +250,6 @@ describe('InventoryListService', () => {
       const items = service.getAllItems();
       const names = service.getInventoryNames(items);
 
-      // Check that we got the inventory names from the Matter user data
       const expectedNames = MatterInventoryList.inventory_list.map(item => item.name);
       expect(names).toEqual(expectedNames);
     });

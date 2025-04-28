@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
 import { mount } from '@vue/test-utils';
-import AppTable from '@/components/common/table/AppTable.vue'; // adjust path if needed
+import AppTable from '@/components/common/table/AppTable.vue';
 import PrimeVue from 'primevue/config';
 import Button from 'primevue/button';
 import DataTable from 'primevue/datatable';

@@ -8,7 +8,6 @@ describe('BaseInventoryService', () => {
   const localStorageKey = 'testKey';
   const userDataMapping = { testUser: [{ id: 1, name: 'Item 1' }] };
 
-  // Mock localStorage
   const localStorageMock = (() => {
     let store = {};
     return {
@@ -22,7 +21,6 @@ describe('BaseInventoryService', () => {
     };
   })();
 
-  // Replace the global localStorage with our mock
   beforeEach(() => {
     Object.defineProperty(window, 'localStorage', {
       value: localStorageMock,
@@ -35,7 +33,7 @@ describe('BaseInventoryService', () => {
 
   describe('getAllItems', () => {
     it('should return an empty array if no user is logged in', () => {
-      localStorageMock.getItem.mockReturnValueOnce(null); // No user logged in
+      localStorageMock.getItem.mockReturnValueOnce(null);
       const items = service.getAllItems();
       expect(items).toEqual([]);
     });
@@ -43,7 +41,6 @@ describe('BaseInventoryService', () => {
     it('should return stored items from localStorage if available', () => {
       const storedItems = [{ id: 2, name: 'Item 2' }];
 
-      // Set up mocked localStorage returns
       localStorageMock.getItem.mockImplementation((key) => {
         if (key === 'user') return JSON.stringify({ username: 'testUser' });
         if (key === localStorageKey) return JSON.stringify(storedItems);
@@ -55,7 +52,6 @@ describe('BaseInventoryService', () => {
     });
 
     it('should return user-specific items if no stored items are found', () => {
-      // User exists but no items stored
       localStorageMock.getItem.mockImplementation((key) => {
         if (key === 'user') return JSON.stringify({ username: 'testUser' });
         return null;
@@ -71,7 +67,6 @@ describe('BaseInventoryService', () => {
       const items = [{ id: 1, name: 'Item 1' }];
       const newItem = { id: 2, name: 'Item 2' };
 
-      // Set up user for the service
       localStorageMock.getItem.mockImplementation((key) => {
         if (key === 'user') return JSON.stringify({ username: 'testUser' });
         return null;
@@ -91,7 +86,6 @@ describe('BaseInventoryService', () => {
       const items = [{ id: 1, name: 'Item 1' }];
       const updatedData = { newData: { id: 1, name: 'Updated Item 1' }, index: 0 };
 
-      // Set up user for the service
       localStorageMock.getItem.mockImplementation((key) => {
         if (key === 'user') return JSON.stringify({ username: 'testUser' });
         return null;
@@ -109,7 +103,6 @@ describe('BaseInventoryService', () => {
       const items = [{ id: 1, name: 'Item 1' }];
       const updatedData = { newData: { id: 2, name: 'Updated Item 2' }, index: 1 };
 
-      // Reset the mock to track the next calls
       localStorageMock.setItem.mockClear();
 
       const updatedItems = service.updateItem(items, updatedData);
@@ -123,7 +116,6 @@ describe('BaseInventoryService', () => {
       const items = [{ id: 1, name: 'Item 1' }, { id: 2, name: 'Item 2' }];
       const itemToDelete = items[0];
 
-      // Set up user for the service
       localStorageMock.getItem.mockImplementation((key) => {
         if (key === 'user') return JSON.stringify({ username: 'testUser' });
         return null;
@@ -140,8 +132,7 @@ describe('BaseInventoryService', () => {
     it('should return the original list if the item is not found', () => {
       const items = [{ id: 1, name: 'Item 1' }];
       const itemToDelete = { id: 2, name: 'Item 2' };
-
-      // Reset the mock to track the next calls
+      
       localStorageMock.setItem.mockClear();
 
       const updatedItems = service.deleteItem(items, itemToDelete);

@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { AuthService } from '@/services/Authservice';  
 import { MATTER_USER, NAIROBI_USER } from '@/constants/user';
-import { Router } from 'vue-router';
+import type { Router } from 'vue-router';
 
 describe('AuthService', () => {
   let mockRouter: Router;

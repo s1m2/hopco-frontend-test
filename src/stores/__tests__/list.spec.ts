@@ -4,7 +4,6 @@ import { useListStore } from '@/stores/list';
 import { InventoryListService } from '@/services/InventoryListService';
 import type { Inventory } from '@/types/inventory';
 
-// Create a mock implementation
 const mockInventory: Inventory[] = [
   { id: 1, name: 'Item 1', display_value: 'item_1' },
   { id: 2, name: 'Item 2', display_value: 'item_2' },
@@ -22,7 +21,6 @@ const mockDeleteItem = vi.fn((items: Inventory[], itemToDelete: Inventory) =>
   items.filter(item => item.id !== itemToDelete.id)
 );
 
-// Mock the InventoryListService
 vi.mock('@/services/InventoryListService', () => {
   return {
     InventoryListService: vi.fn(() => ({
@@ -40,10 +38,7 @@ describe('useListStore', () => {
   let inventoryListService: InventoryListService;
 
   beforeEach(() => {
-    // Create a fresh Pinia instance and make it active
     setActivePinia(createPinia());
-
-    // Create a new store and reset all mocks
     store = useListStore();
     inventoryListService = new InventoryListService();
     vi.clearAllMocks();
@@ -78,15 +73,12 @@ describe('useListStore', () => {
 
   describe('updateInventoryListItem', () => {
     beforeEach(() => {
-      // First populate the inventory
       store.inventoryList = [...mockInventory];
     });
 
     it('should update an item at the specified index', () => {
       const updatedItem = { id: 1, name: 'Updated Item', display_value: 'updated_item' };
       store.updateInventoryListItem({ newData: updatedItem, index: 0 });
-
-      // Verify the service method was called with correct arguments
       expect(mockUpdateItem).toHaveBeenCalledWith(
         [
           { id: 1, name: 'Item 1', display_value: 'item_1' },
@@ -94,8 +86,6 @@ describe('useListStore', () => {
         ],
         { newData: updatedItem, index: 0 }
       );
-
-      // Verify the store state was updated
       expect(store.inventoryList).toEqual([
         updatedItem,
         { id: 2, name: 'Item 2', display_value: 'item_2' }
@@ -105,8 +95,6 @@ describe('useListStore', () => {
     it('should update filters after updating an item', () => {
       const updatedItem = { id: 1, name: 'Updated Item', display_value: 'updated_item' };
       store.updateInventoryListItem({ newData: updatedItem, index: 0 });
-
-      // Instead of checking if mock was called, just verify the filters result
       expect(store.filters).toEqual(['Updated Item', 'Item 2']);
     });
   });
@@ -118,14 +106,14 @@ describe('useListStore', () => {
 
       expect(inventoryListService.addItem).toHaveBeenCalled();
       expect(store.inventoryList).toContainEqual({
-        id: 1, // Since the initial list is empty
+        id: 1,
         name: newItemName,
         display_value: 'new_item',
       });
     });
 
     it('should increment the id correctly when adding items', () => {
-      store.fetchInventoryList(); // Now we have 2 items with ids 1 and 2
+      store.fetchInventoryList();
       store.addInventoryListItem('Third Item');
 
       expect(store.inventoryList?.[2].id).toBe(3);
@@ -139,23 +127,19 @@ describe('useListStore', () => {
 
   describe('deleteInventoryListItem', () => {
     beforeEach(() => {
-      // First populate the inventory
       store.inventoryList = [...mockInventory];
     });
 
     it('should delete the specified item', () => {
-      const itemToDelete = { ...mockInventory[0] }; // Copy the first item
+      const itemToDelete = { ...mockInventory[0] };
       const initialInventory = [...store.inventoryList!];
 
       store.deleteInventoryListItem(itemToDelete);
-
-      // Verify the service method was called with correct arguments
       expect(mockDeleteItem).toHaveBeenCalledWith(
-        initialInventory, // Should be the full inventory before deletion
+        initialInventory,
         itemToDelete
       );
 
-      // Verify the store state was updated
       expect(store.inventoryList).toEqual([
         { id: 2, name: 'Item 2', display_value: 'item_2' }
       ]);

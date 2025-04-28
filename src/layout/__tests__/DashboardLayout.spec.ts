@@ -29,10 +29,7 @@ describe('DashboardLayout.vue', () => {
   it('renders AppNav and AppSideNav components', () => {
     const wrapper = mountComponent();
 
-    // Test that AppNav is rendered
     expect(wrapper.findComponent(AppNav).exists()).toBe(true);
-
-    // Test that AppSideNav is rendered
     expect(wrapper.findComponent(AppSideNav).exists()).toBe(true);
   });
 
