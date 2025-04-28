@@ -6,13 +6,13 @@ import InputText from 'primevue/inputtext';
 import { FilterMatchMode } from '@primevue/core/api';
 import Button from 'primevue/button';
 
-import type { Header } from '@/types/header';
+import type { Inventory } from '@/types/inventory';
 
 type Product = Record<string, any>;
 type RowEditSaveEvent = { newData: Product; index: number };
 
 const props = defineProps<{
-  headers: Header[]
+  headers: Inventory[]
   products: Product[]
   filter_values: string[]
 }>()
