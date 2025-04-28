@@ -7,27 +7,22 @@ import Button from 'primevue/button';
 import { storeToRefs } from 'pinia';
 import { useListStore } from '@/stores/list';
 import { useItemsStore } from '@/stores/items';
-import { useToast } from 'primevue/usetoast';
-import { toastConfig } from '@/config/toast';
+import { useToastMessages } from '@/composables/useToastMessages';
 
 const listStore = useListStore();
 const itemsStore = useItemsStore();
-const toast = useToast()
+const toast = useToastMessages();
 
 const { inventoryList } = storeToRefs(listStore);
 const { addInventoryItem } = itemsStore;
 const { fetchInventoryList } = listStore;
-
 
 const list = ref({});
 
 function saveItem() {
   addInventoryItem(list.value);
   list.value = {};
-   toast.add({
-    ...toastConfig,
-    detail: 'Property Name Added Successfully',
-  })
+  toast.showSuccess('Property Name Added Successfully');
 }
 
 fetchInventoryList();

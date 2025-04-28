@@ -8,10 +8,10 @@ import Dialog from 'primevue/dialog';
 import InputText from 'primevue/inputtext';
 
 import type { Inventory } from '@/types/inventory';
-import { toastConfig } from '@/config/toast';
-import { useToast } from 'primevue/usetoast';
+
 import { storeToRefs } from 'pinia';
 import { useListStore } from '@/stores/list';
+import { useToastMessages } from '@/composables/useToastMessages';
 
 const listStore = useListStore();
 const {
@@ -24,7 +24,7 @@ const { inventoryList } = storeToRefs(listStore);
 const headers = [{ id: 1, name: 'display_value', display_value: 'Property Name', visible: true }];
 const isDialogVisible = ref(false);
 const propertyName = ref('');
-const toast = useToast();
+const toast = useToastMessages();
 
 function toggleDialog() {
   isDialogVisible.value = !isDialogVisible.value;
@@ -34,18 +34,12 @@ function saveProduct() {
   addInventoryListItem(propertyName.value);
   propertyName.value = '';
   isDialogVisible.value = false;
-  toast.add({
-    ...toastConfig,
-    detail: 'Property Name Added Successfully',
-  });
+  toast.showSuccess('Property Name Added Successfully');
 }
 
 function deleteInventoryItem(item:Inventory) {
   deleteInventoryListItem(item);
-  toast.add({
-    ...toastConfig,
-    detail: 'Property Name Deleted Successfully',
-  })
+  toast.showSuccess('Property Name Deleted Successfully');
 }
 
 onMounted(() => {

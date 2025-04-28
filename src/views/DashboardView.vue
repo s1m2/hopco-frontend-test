@@ -23,6 +23,7 @@ getAllInventoryItems();
     <main>
       <p data-test-id="dashboard-page-title" class="text-2xl font-semibold mb-8">Welcome back to your dashboard</p>
       <AppTable
+        data-test-id="dashboard-table"
         :headers="inventoryList"
         :filter_values="filters"
         :products="items"

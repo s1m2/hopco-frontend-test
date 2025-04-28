@@ -7,7 +7,7 @@ import AppSideNav from '@/components/common/sidenav/AppSideNav.vue';
   <main data-test-id="dashboard-layout">
     <AppNav />
     <div class="md:flex my-4 mx-10">
-      <AppSideNav />
+      <AppSideNav class="mb-10 md:mb-0" />
       <div class="bg-white p-4 shadow-sm text-sm w-full overflow-hidden">
         <slot />
       </div>

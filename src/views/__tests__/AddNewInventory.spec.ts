@@ -29,6 +29,19 @@ vi.mock('@/layout/DashboardLayout.vue', () => ({
   }
 }));
 
+vi.mock('@/composables/useToastMessages', () => ({
+  useToastMessages: () => ({
+    showSuccess: vi.fn()
+  })
+}))
+
+vi.mock('primevue/toast', () => ({
+  default: {
+    name: 'Toast',
+    template: '<div class="p-toast"></div>'
+  }
+}));
+
 describe('InventoryFormView', () => {
   let wrapper;
   let listStore;
