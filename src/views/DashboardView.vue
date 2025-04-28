@@ -1,21 +1,21 @@
 <script setup lang="ts">
-import AppTable from '@/components/common/table/AppTable.vue'
-import DashboardLayout from '@/layout/DashboardLayout.vue'
-import { storeToRefs } from 'pinia'
-import { useListStore } from '@/stores/list'
-import { useItemsStore } from '@/stores/items'
+import AppTable from '@/components/common/table/AppTable.vue';
+import DashboardLayout from '@/layout/DashboardLayout.vue';
+import { storeToRefs } from 'pinia';
+import { useListStore } from '@/stores/list';
+import { useItemsStore } from '@/stores/items';
 
-const listStore = useListStore()
-const itemsStore = useItemsStore()
+const listStore = useListStore();
+const itemsStore = useItemsStore();
 
-const { fetchInventoryList } = listStore
-const { getAllInventoryItems, updateInventoryListItem, deleteInventoryListItem } = itemsStore
+const { fetchInventoryList } = listStore;
+const { getAllInventoryItems, updateInventoryListItem, deleteInventoryListItem } = itemsStore;
 
-const { inventoryList, filters } = storeToRefs(listStore)
-const { items } = storeToRefs(itemsStore)
+const { inventoryList, filters } = storeToRefs(listStore);
+const { items } = storeToRefs(itemsStore);
 
-fetchInventoryList()
-getAllInventoryItems()
+fetchInventoryList();
+getAllInventoryItems();
 </script>
 
 <template>

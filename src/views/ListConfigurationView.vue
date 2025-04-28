@@ -49,7 +49,7 @@ function deleteInventoryItem(item:Inventory) {
 }
 
 onMounted(() => {
-  fetchInventoryList()
+  fetchInventoryList();
 })
 </script>
 
